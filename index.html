@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spam Detector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+        }
+        .message {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Spam Detector</h1>
+        <form onsubmit="return checkForSpam()">
+            <label for="message">Type your message:</label>
+            <input type="text" id="message" required>
+            <br><br>
+            <input type="submit" value="Check for Spam">
+        </form>
+        <div class="message" id="result"></div>
+    </div>
+    
+    <script>
+        function checkForSpam() {
+            const userMessage = document.getElementById('message').value.toLowerCase();
+            const spamKeywords = ["buy", "discount", "sale", "win", "free", "money"];
+            
+            for (const keyword of spamKeywords) {
+                if (userMessage.includes(keyword)) {
+                    document.getElementById('result').textContent = "This message is likely spam.";
+                    return false; // Prevent form submission
+                }
+            }
+            
+            document.getElementById('result').textContent = "This message appears to be a normal human message.";
+            return false; // Prevent form submission
+        }
+    </script>
+</body>
+</html>
